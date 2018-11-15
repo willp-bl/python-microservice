@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, request, session, escape, url_for
+from classes.pharrell import Pharrell
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def hello_world(path=''):
     if path == 'redirect':
         return redirect('/youve_been_redirected')
 
-    return render_template('root.html', path=path)
+    return render_template('root.html', path=path, message=Pharrell().get_message())
 
 @app.errorhandler(404)
 def fourohfour(error):
