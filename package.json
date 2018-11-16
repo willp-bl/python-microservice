@@ -1,0 +1,21 @@
+{
+  "name": "python-microservice",
+  "version": "0.0.1",
+  "description": "a small python microservice",
+  "engines": {
+    "node": "10.13.0"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willp-bl/pascal-microservice.git"
+  },
+  "author": "William Palmer",
+  "license": "MIT",
+  "homepage": "https://github.com/willp-bl/pascal-microservice",
+  "dependencies": {
+    "govuk-frontend": "^2.3.0",
+    "nunjucks": "^3.1.4"
+  },
+  "devDependencies": {}
+}

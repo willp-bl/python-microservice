@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, request, session, escape, url_for
+
 from classes.pharrell import Pharrell
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='node_modules/govuk-frontend/assets', static_url_path='/assets')
 
 app.secret_key = b'dmVyeXZlcnl2ZXJ5c2VjdXJl'
 
