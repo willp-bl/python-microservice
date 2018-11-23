@@ -1,1 +1,5 @@
 flask
+flask-assets
+jinja2
+
+-e git://github.com/lfdebrux/govuk-frontend-python@master#egg=govuk-frontend-python
