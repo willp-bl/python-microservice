@@ -1,22 +1,12 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, redirect, request, session, escape, url_for
-from flask_assets import Bundle
-# overriding the normal jinja2 Environment so it loads the govuk-frontend template.njk
-from govuk_frontend.templates import Environment
-from jinja2 import select_autoescape
+from flask import Flask, redirect, request, session, escape, url_for, render_template, send_from_directory
 
 from classes.pharrell import Pharrell
 
-app = Flask(__name__, static_folder='node_modules/govuk-frontend/assets', static_url_path='/assets')
+app = Flask(__name__)
 
 app.secret_key = b'dmVyeXZlcnl2ZXJ5c2VjdXJl'
-
-env = Environment(
-    autoescape=select_autoescape(['html', 'xml'])
-)
-
-scss = Bundle('all.scss', filters='pyscss', output='all.css')
-env.register('scss_all', scss)
 
 @app.route('/', methods=['GET'])
 @app.route('/<path>', methods=['GET'])
@@ -25,8 +15,7 @@ def hello_world(path=''):
     if path == 'redirect':
         return redirect('/youve_been_redirected')
 
-    template = env.get_template('template.njk')
-    return template.render(path=path, message=Pharrell().get_message())
+    return render_template('index.html', path=path, message=Pharrell().get_message())
 
 @app.errorhandler(404)
 def fourohfour(error):
@@ -53,3 +42,12 @@ def access_secure_area():
 def logout():
     session.pop('username', None)
     return redirect(url_for('hello_world'))
+
+# load assets directly from govuk-frontend package
+# this is done instead of overriding the `static` directory in Flask()
+@app.route('/assets/<path:filename>')
+def send_file(filename):
+    return send_from_directory('node_modules/govuk-frontend/assets/', filename)
+
+#if __name__ == '__main__':
+#    app.run()
