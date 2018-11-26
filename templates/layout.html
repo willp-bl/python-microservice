@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/main.css">
-    <title>Document</title>
-</head>
-<body>
-{% block content %}
+{% extends "template.njk" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/main.css">
 {% endblock %}
+<!-- this js include probably needs work -->
+{% block content %}
+{{ super() }}
 <script src="/static/main.js"></script>
-</body>
-</html>
+{% endblock %}

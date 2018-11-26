@@ -1,10 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Flask, redirect, request, session, escape, url_for, render_template, send_from_directory
+from os import path
+
+from flask import Flask, redirect, request, session, escape, url_for, send_from_directory
+from jinja2 import select_autoescape, ChoiceLoader, FileSystemLoader, Environment
 
 from classes.pharrell import Pharrell
 
+
+# from https://github.com/lfdebrux/govuk-frontend-python/blob/d3dd9f6cb689731753346746d2b5c7229f5293e2/govuk_frontend/templates.py#L12
+class Environment2(Environment):
+    def join_path(self, template, parent):
+        """Enable the use of relative paths in template import statements"""
+        return path.normpath(path.join(path.dirname(parent), template))
+
+
 app = Flask(__name__)
+env = Environment2(loader=ChoiceLoader([FileSystemLoader('templates/'), FileSystemLoader("node_modules/govuk-frontend/")]),
+                  autoescape=select_autoescape(['html', 'xml']),
+                  extensions=[])
 
 app.secret_key = b'dmVyeXZlcnl2ZXJ5c2VjdXJl'
 
@@ -15,7 +29,8 @@ def hello_world(path=''):
     if path == 'redirect':
         return redirect('/youve_been_redirected')
 
-    return render_template('index.html', path=path, message=Pharrell().get_message())
+    template = env.get_template('index.html')
+    return template.render(path=path, message=Pharrell().get_message())
 
 @app.errorhandler(404)
 def fourohfour(error):
