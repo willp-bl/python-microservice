@@ -1,15 +1,32 @@
 {% extends "template.njk" %}
+
+{% from "header/macro.njk" import govukHeader %}
+{% from "phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% set htmlLang = "en" %}
+{% set themeColor = "orange" %}
+
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="/static/main.css">
 {% endblock %}
 
+{#
+{% block header %}
+{{ govukHeader({
+homepageUrl: "#",
+containerClasses: "govuk-width-container",
+serviceName: "Service name",
+serviceUrl: "#",
+navigation: [] }) }}
+{% endblock %}
+#}
+
 {% block pageTitle %}GDS Team Metrics{% endblock %}
 
-{% block header %}
+{% block beforeContent %}
 {{ super() }}
-{% from "phase-banner/macro.njk" import govukPhaseBanner %}
-<!-- classes is not optional, in some way -->
+{# classes is not optional, in some way #}
 {{ govukPhaseBanner({ 'tag': { 'text': 'prototype', 'classes': 'foo' },
                       'html': 'This is a prototype service' })
 }}
