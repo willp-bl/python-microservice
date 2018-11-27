@@ -3,8 +3,19 @@
 {{ super() }}
 <link rel="stylesheet" href="/static/main.css">
 {% endblock %}
-<!-- this js include probably needs work -->
-{% block content %}
+
+{% block pageTitle %}GDS Team Metrics{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% from "phase-banner/macro.njk" import govukPhaseBanner %}
+<!-- classes is not optional, in some way -->
+{{ govukPhaseBanner({ 'tag': { 'text': 'prototype', 'classes': 'foo' },
+                      'html': 'This is a prototype service' })
+}}
+{% endblock %}
+
+{% block bodyEnd %}
 {{ super() }}
 <script src="/static/main.js"></script>
 {% endblock %}

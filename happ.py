@@ -14,9 +14,10 @@ class Environment2(Environment):
         """Enable the use of relative paths in template import statements"""
         return path.normpath(path.join(path.dirname(parent), template))
 
-
 app = Flask(__name__)
-env = Environment2(loader=ChoiceLoader([FileSystemLoader('templates/'), FileSystemLoader("node_modules/govuk-frontend/")]),
+env = Environment2(loader=ChoiceLoader([FileSystemLoader('templates/'),
+                                        FileSystemLoader("node_modules/govuk-frontend/"),
+                                        FileSystemLoader("node_modules/govuk-frontend/components/")]),
                   autoescape=select_autoescape(['html', 'xml']),
                   extensions=[])
 
