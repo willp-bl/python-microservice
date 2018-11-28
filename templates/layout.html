@@ -2,16 +2,18 @@
 
 {% from "header/macro.njk" import govukHeader %}
 {% from "phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "table/macro.njk" import govukTable %}
 
 {% set htmlLang = "en" %}
 {% set themeColor = "orange" %}
+
+{% block pageTitle %}GDS Team Metrics{% endblock %}
 
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="/static/main.css">
 {% endblock %}
 
-{#
 {% block header %}
 {{ govukHeader({
 homepageUrl: "#",
@@ -20,9 +22,6 @@ serviceName: "Service name",
 serviceUrl: "#",
 navigation: [] }) }}
 {% endblock %}
-#}
-
-{% block pageTitle %}GDS Team Metrics{% endblock %}
 
 {% block beforeContent %}
 {{ super() }}
@@ -30,6 +29,45 @@ navigation: [] }) }}
 {{ govukPhaseBanner({ 'tag': { 'text': 'prototype', 'classes': 'foo' },
                       'html': 'This is a prototype service' })
 }}
+{% endblock %}
+
+{% block content %}
+{{ govukTable({
+caption: "RE Traceability Team (source: pivotal)",
+firstCellIsHeader: true,
+head: [
+{ text: "Metric" },
+{ text: "12/11/2018 - 19/11/2018" },
+{ text: "19/11/2018 - 26/11/2018" },
+{ text: "26/11/2018 - 03/12/2018" }
+],
+rows: [
+[
+{ text: "Cycle Time" },
+{ text: "1" },
+{ text: "1" },
+{ text: "1" }
+],
+[
+{ text: "Process Cycle Efficiency" },
+{ text: "1" },
+{ text: "1" },
+{ text: "1" }
+],
+[
+{ text: "Number Of Stories Completed" },
+{ text: "1" },
+{ text: "1" },
+{ text: "1" }
+],
+[
+{ text: "Number Of Stories Incomplete" },
+{ text: "1" },
+{ text: "1" },
+{ text: "1" }
+]
+]
+}) }}
 {% endblock %}
 
 {% block bodyEnd %}
