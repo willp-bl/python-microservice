@@ -33,7 +33,12 @@ def hello_world(path=''):
     template = env.get_template('index.html')
     return template.render(path=path, message=Pharrell().get_message())
 
-@app.route('/teams/gds/delivery-and-support/technical-operations/traceability', methods=['GET'])
+@app.route('/teams/gds/delivery-and-support/technology-operations', methods=['GET'])
+def techops_team():
+    template = env.get_template('techops.html')
+    return template.render()
+
+@app.route('/teams/gds/delivery-and-support/technology-operations/traceability', methods=['GET'])
 def traceability_team():
     template = env.get_template('traceability.html')
     return template.render()
