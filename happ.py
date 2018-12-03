@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 from os import path
 
 from flask import Flask, redirect, request, session, escape, url_for, send_from_directory
@@ -23,6 +24,7 @@ env = Environment2(loader=ChoiceLoader([FileSystemLoader('templates/'),
 
 app.secret_key = b'dmVyeXZlcnl2ZXJ5c2VjdXJl'
 
+
 @app.route('/', methods=['GET'])
 @app.route('/<path>', methods=['GET'])
 def hello_world(path=''):
@@ -33,19 +35,32 @@ def hello_world(path=''):
     template = env.get_template('index.html')
     return template.render(path=path, message=Pharrell().get_message())
 
+
 @app.route('/teams/gds/delivery-and-support/technology-operations', methods=['GET'])
 def techops_team():
     template = env.get_template('techops.html')
     return template.render()
+
 
 @app.route('/teams/gds/delivery-and-support/technology-operations/traceability', methods=['GET'])
 def traceability_team():
     template = env.get_template('traceability.html')
     return template.render()
 
+
+@app.route('/teams/gds/delivery-and-support/technology-operations/cyber-tooling', methods=['GET'])
+def cyber_tooling_team():
+    with open('data/CT.json') as f:
+        data = json.load(f)
+
+    template = env.get_template('cyber-tooling.html')
+    return template.render(metrics=data)
+
+
 @app.errorhandler(404)
 def fourohfour(error):
     return '404!', 404
+
 
 @app.route('/secure', methods=['GET', 'POST'])
 def access_secure_area():
@@ -64,16 +79,19 @@ def access_secure_area():
         </form>
     '''
 
+
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     return redirect(url_for('hello_world'))
+
 
 # load assets directly from govuk-frontend package
 # this is done instead of overriding the `static` directory in Flask()
 @app.route('/assets/<path:filename>')
 def send_file(filename):
     return send_from_directory('node_modules/govuk-frontend/assets/', filename)
+
 
 #if __name__ == '__main__':
 #    app.run()
