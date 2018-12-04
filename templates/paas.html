@@ -57,31 +57,22 @@
     </tr>
     <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="row">Number Of People Days</th>
-        <td class="govuk-table__cell">5</td>
-        <td class="govuk-table__cell">5</td>
-        <td class="govuk-table__cell">5</td>
-        <td class="govuk-table__cell">5</td>
-        <td class="govuk-table__cell">5</td>
-        <td class="govuk-table__cell">5</td>
+        {% for i in range(metrics|length) %}
+            <td class="govuk-table__cell">5</td>
+        {% endfor %}
     </tr>
     <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="row">Mean Time To Recovery (MTTR)</th>
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">1</td>
-        <td class="govuk-table__cell">1</td>
+        {% for i in range(metrics|length) %}
+            <td class="govuk-table__cell">1</td>
+        {% endfor %}
     </tr>
     <tr class="govuk-table__row">
         <th class="govuk-table__header" scope="row">Number Of Releases</th>
-        <td class="govuk-table__cell">0</td>
-        <td class="govuk-table__cell">0</td>
-        <td class="govuk-table__cell">0</td>
-        <td class="govuk-table__cell">0</td>
-        <td class="govuk-table__cell">0</td>
-        <td class="govuk-table__cell">0</td>
-    </tr>
+        {% for i in range(metrics|length) %}
+            <td class="govuk-table__cell">0</td>
+        {% endfor %}
+        </tr>
     </tbody>
 </table>
 
