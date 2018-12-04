@@ -57,6 +57,15 @@ def cyber_tooling_team():
     return template.render(metrics=data)
 
 
+@app.route('/teams/gds/delivery-and-support/technology-operations/paas', methods=['GET'])
+def paas_team():
+    with open('data/paas.json') as f:
+        data = json.load(f)
+
+    template = env.get_template('paas.html')
+    return template.render(metrics=data)
+
+
 @app.errorhandler(404)
 def fourohfour(error):
     return '404!', 404
