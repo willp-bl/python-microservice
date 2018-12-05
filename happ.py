@@ -48,7 +48,12 @@ def traceability_team():
     return template.render()
 
 
-@app.route('/teams/gds/delivery-and-support/technology-operations/cyber-tooling', methods=['GET'])
+@app.route('/teams/gds/delivery-and-support/technology-operations/cyber', methods=['GET'])
+def cyber_team():
+    template = env.get_template('cyber.html')
+    return template.render()
+
+@app.route('/teams/gds/delivery-and-support/technology-operations/cyber/tooling', methods=['GET'])
 def cyber_tooling_team():
     with open('data/CT.json') as f:
         data = json.load(f)
@@ -57,7 +62,13 @@ def cyber_tooling_team():
     return template.render(metrics=data)
 
 
-@app.route('/teams/gds/delivery-and-support/technology-operations/paas', methods=['GET'])
+@app.route('/teams/gds/delivery-and-support/technology-operations/reliability-engineering', methods=['GET'])
+def re_team():
+    template = env.get_template('reliability-engineering.html')
+    return template.render()
+
+
+@app.route('/teams/gds/delivery-and-support/technology-operations/reliability-engineering/paas', methods=['GET'])
 def paas_team():
     with open('data/paas.json') as f:
         data = json.load(f)
